@@ -1,4 +1,7 @@
 
+exports.init=function(foo){
+	foo.addImportPath(__dirname+'/viewmacros');
+}
 
 exports.filterPage=function(items,page,pageSize){
 	items=items.filter(function(elem,index){
