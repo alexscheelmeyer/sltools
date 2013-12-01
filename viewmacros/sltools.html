@@ -1,0 +1,33 @@
+
+{% macro pagination(urlPrefix) %}
+
+<ul class="pagination">
+  {% if pageIndex>0 %}
+  {% set prevPage pageIndex %}
+    {% if prevPage==1 %}
+      <li><a href="{# urlPrefix #}">&laquo;</a></li>
+    {% else %}
+      <li><a href="{# urlPrefix #}page{# prevPage #}">&laquo;</a></li>
+    {% endif %}
+  {% endif %}
+
+  {% each page in pagination %}
+    {% if loop.index == pageIndex %}
+      <li class="active"><a>{# page #}</a></li>
+    {% else %}
+          {% if page==1 %}
+        <li><a href="{# urlPrefix #}">1</a></li>
+          {% else %}
+        <li><a href="{# urlPrefix #}page{# page #}">{# page #}</a></li>
+      {% endif %}
+    {% endif %}
+  {% endeach %}
+
+  {% set numPages pagination.length %}
+  {% if pageIndex < (numPages-1) %}
+  {% set nextPage pageIndex+2 %}
+  <li><a href="{# urlPrefix #}page{# nextPage #}">&raquo;</a></li>
+  {% endif %}
+</ul>
+
+{% endmacro %}
